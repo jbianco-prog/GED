@@ -1,6 +1,7 @@
 # GED Documentaire — Gestion Électronique de Documents
 
 > Plateforme de gestion documentaire d'entreprise avec classification automatique par IA, détection DLP et contrôle d'accès avancé.
+> S'appuie sur une interface ressemblante à SharePoint
 
 ---
 
