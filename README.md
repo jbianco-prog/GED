@@ -1,7 +1,16 @@
 # GED Documentaire — Gestion Électronique de Documents
 
+[![PHP](https://img.shields.io/badge/PHP-8.1+-777BB4.svg?logo=php&logoColor=white)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Claude AI](https://img.shields.io/badge/Claude_AI-claude--sonnet--4-D4A017.svg?logo=anthropic&logoColor=white)](https://www.anthropic.com/)
+[![Apache](https://img.shields.io/badge/Apache-2.4+-D22128.svg?logo=apache&logoColor=white)](https://httpd.apache.org/)
+[![License](https://img.shields.io/badge/License-GPL-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Production-success.svg)]()
+[![DLP](https://img.shields.io/badge/DLP-Actif-red.svg)]()
+[![RGPD](https://img.shields.io/badge/RGPD-Conforme-blue.svg)]()
+
 > Plateforme de gestion documentaire d'entreprise avec classification automatique par IA, détection DLP et contrôle d'accès avancé.
-> S'appuie sur une interface ressemblante à SharePoint
+> LA PUBLICATION N'EST PAS COMPLETE - S'appuie sur une interface ressemblante à SharePoint
 
 ---
 
