@@ -278,8 +278,6 @@ FLUSH PRIVILEGES;
 
 ```bash
 mysql -u ged_user -p ged_db < database/schema.sql
-mysql -u ged_user -p ged_db < database/migration_resume_ai.sql
-mysql -u ged_user -p ged_db < database/migration_settings.sql
 ```
 
 **4. Configurer l'application**
@@ -657,33 +655,6 @@ php bin/manage-users.php
 # 1. Schéma de base (obligatoire — tables + données initiales)
 mysql -u user -p db < database/schema.sql
 
-# 2. Colonne resume_ai (résumés IA thématiques)
-mysql -u user -p db < database/migration_resume_ai.sql
-
-# 3. Table settings (interrupteur DLP global)
-mysql -u user -p db < database/migration_settings.sql
-```
-
-**`migration_resume_ai.sql`**
-```sql
-ALTER TABLE `file_analysis`
-    ADD COLUMN `resume_ai` VARCHAR(100) NULL DEFAULT NULL
-    AFTER `raisons_ia`;
-```
-
-**`migration_settings.sql`**
-```sql
-CREATE TABLE IF NOT EXISTS `settings` (
-    `cle`        VARCHAR(100) NOT NULL PRIMARY KEY,
-    `valeur`     TEXT NOT NULL DEFAULT '',
-    `updated_by` INT UNSIGNED NULL,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO `settings` (`cle`, `valeur`) VALUES ('dlp_enabled', '1')
-ON DUPLICATE KEY UPDATE `cle` = `cle`;
-```
 
 ---
 
