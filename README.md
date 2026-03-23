@@ -654,7 +654,7 @@ php bin/manage-users.php
 ```bash
 # 1. Schéma de base (obligatoire — tables + données initiales)
 mysql -u user -p db < database/schema.sql
-
+```
 
 ---
 
