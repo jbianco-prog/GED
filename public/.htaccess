@@ -1,0 +1,44 @@
+# public/.htaccess — Configuration Apache pour la GED
+
+# ── Sécurité de base ───────────────────────────────────────────────────────────
+Options -Indexes -ExecCGI
+ServerSignature Off
+
+# ── Interdire l'accès aux fichiers sensibles ───────────────────────────────────
+<FilesMatch "\.(sql|log|env|bak|sh|py|rb|md)$">
+    Require all denied
+</FilesMatch>
+
+# ── Headers de sécurité ────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    # CSP basique — ajuster selon les besoins
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+</IfModule>
+
+# ── Réécriture vers index.php si nécessaire ────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Pas de réécriture si le fichier/dossier existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Rediriger vers index.php
+    RewriteRule ^(.*)$ index.php?$1 [QSA,L]
+</IfModule>
+
+# ── Encodage UTF-8 ─────────────────────────────────────────────────────────────
+AddDefaultCharset UTF-8
+
+# ── PHP settings ───────────────────────────────────────────────────────────────
+<IfModule mod_php.c>
+    php_value upload_max_filesize 50M
+    php_value post_max_size 55M
+    php_value max_execution_time 120
+    php_value memory_limit 256M
+    php_flag display_errors Off
+    php_flag log_errors On
+</IfModule>

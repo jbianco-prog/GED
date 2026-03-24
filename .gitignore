@@ -1,0 +1,30 @@
+# .gitignore
+
+# Configuration sensible
+.env
+config/config.local.php
+
+# Fichiers uploadés
+storage/*
+!storage/.htaccess
+!storage/tmp/
+storage/tmp/*
+!storage/tmp/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dépendances (si Composer ajouté plus tard)
+vendor/
+composer.lock

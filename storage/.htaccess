@@ -1,0 +1,2 @@
+# storage/.htaccess — Bloquer tout accès direct aux fichiers stockés
+Require all denied

@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+
+  # ── Serveur web PHP ──────────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: ged_app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/ged:ro                        # Code source en lecture seule
+      - ged_storage:/var/www/ged/storage         # Stockage des fichiers (persistant)
+    environment:
+      DB_HOST:     db
+      DB_PORT:     3306
+      DB_NAME:     ged_db
+      DB_USER:     ged_user
+      DB_PASS:     ${DB_PASS:-ged_password_change_me}
+      APP_URL:     ${APP_URL:-http://localhost:8080}
+      APP_ENV:     ${APP_ENV:-production}
+      CLAUDE_API_KEY: ${CLAUDE_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - ged_net
+
+  # ── Base de données MySQL ────────────────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: ged_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password_change_me}
+      MYSQL_DATABASE:      ged_db
+      MYSQL_USER:          ged_user
+      MYSQL_PASSWORD:      ${DB_PASS:-ged_password_change_me}
+    volumes:
+      - ged_db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "ged_user", "-p${DB_PASS:-ged_password_change_me}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ged_net
+
+  # ── phpMyAdmin (optionnel, désactiver en production) ─────────────────────────
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: ged_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST:     db
+      PMA_USER:     ged_user
+      PMA_PASSWORD: ${DB_PASS:-ged_password_change_me}
+    depends_on:
+      - db
+    networks:
+      - ged_net
+    profiles:
+      - dev   # Ne démarre qu'avec : docker compose --profile dev up
+
+volumes:
+  ged_db_data:
+  ged_storage:
+
+networks:
+  ged_net:
+    driver: bridge

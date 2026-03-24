@@ -1,0 +1,5 @@
+# .htaccess racine — Bloquer l'accès direct aux dossiers PHP/config
+
+# Interdire tout accès direct à la racine (hors public/)
+Options -Indexes
+Require all denied
