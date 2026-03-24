@@ -1,6 +1,6 @@
 <?php
 // config/config.php — Configuration centrale de la GED
-
+//
 // ── Base de données ──────────────────────────────────────────────────────────
 define('DB_HOST',     getenv('DB_HOST')     ?: '');
 define('DB_PORT',     getenv('DB_PORT')     ?: '3306');
