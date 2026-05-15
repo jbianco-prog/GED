@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../bootstrap.php';
 Auth::requireLogin();
 
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
