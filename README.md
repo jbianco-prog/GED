@@ -89,8 +89,6 @@ ged/
 │   └── config.php                 # Configuration centrale (DB, IA, upload, sécurité)
 ├── database/
 │   ├── schema.sql                 # Schéma complet (6 tables + données initiales)
-│   ├── migration_resume_ai.sql    # Colonne resume_ai dans file_analysis
-│   └── migration_settings.sql    # Table settings (paramètres globaux)
 ├── src/
 │   ├── Auth/
 │   │   └── Auth.php               # Authentification, sessions, CSRF, rôles
