@@ -277,8 +277,6 @@ FLUSH PRIVILEGES;
 
 ```bash
 mysql -u ged_user -p ged_db < database/schema.sql
-mysql -u ged_user -p ged_db < database/migration_resume_ai.sql
-mysql -u ged_user -p ged_db < database/migration_settings.sql
 ```
 
 **4. Configurer l'application**
