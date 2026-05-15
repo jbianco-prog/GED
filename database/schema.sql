@@ -118,6 +118,15 @@ CREATE TABLE `folders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Données de la table `folders`
+--
+
+INSERT INTO `folders` (`id`, `nom`, `parent_id`, `chemin`, `created_by`, `created_at`) VALUES
+(1, 'Documents', NULL, '/Documents', 1, '2026-01-01 09:00:00'),
+(8, 'Contracts', 1, '/Documents/Contracts', 1, '2026-04-21 23:00:28'),
+(9, 'Sales', 1, '/Documents/Sales', 1, '2026-04-21 23:00:34');
+
+--
 -- Structure de la table `settings`
 --
 
